@@ -1,0 +1,16 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# IDEA & Eclipse
+*.iml
+.idea
+/out
+
+# Gradle & Maven
+target
+build
+.gradle
