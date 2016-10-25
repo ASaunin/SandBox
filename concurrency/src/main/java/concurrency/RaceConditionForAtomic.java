@@ -2,9 +2,11 @@ package concurrency;
 
 import utils.ThreadUtils;
 
-public class RaceCondition {
+import java.util.concurrent.atomic.AtomicInteger;
 
-    private static int count = 0;
+public class RaceConditionForAtomic {
+
+    private static AtomicInteger count = new AtomicInteger(0);
 
     private static class Counter implements Runnable {
 
@@ -12,15 +14,9 @@ public class RaceCondition {
         public void run() {
             while (true) {
                 ThreadUtils.sleep(1000);
-                inc();
+                final int value = count.incrementAndGet();
+                System.out.println(value);
             }
-        }
-
-        //Doesn't work without static
-        //Atomics are preferable in that case, cause they cost less resources
-        synchronized private static void inc() {
-            count++;
-            System.out.println(count);
         }
     }
 
