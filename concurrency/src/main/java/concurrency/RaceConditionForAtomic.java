@@ -15,7 +15,7 @@ public class RaceConditionForAtomic {
             while (true) {
                 ThreadUtils.sleep(1000);
                 final int value = count.incrementAndGet();
-                System.out.println(value);
+                System.out.println(value); //Out doesn't work properly, cause println is not in critical section
             }
         }
     }
