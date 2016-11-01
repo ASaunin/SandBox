@@ -3,8 +3,9 @@ package concurrency;
 import org.junit.Test;
 import utils.ThreadUtils;
 
-import static concurrency.ReentrantLockExample.*;
-import static org.junit.Assert.assertEquals;
+import static concurrency.ReentrantLockExample.Sum;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ReentrantLockExampleTest {
 
@@ -14,7 +15,7 @@ public class ReentrantLockExampleTest {
         final SingleThreadExecutor executor2 = new SingleThreadExecutor();
         final Runnable task = () -> {
             final int actualValue = Sum.change();
-            assertEquals(actualValue, Sum.TOTAL_AMOUNT);
+            assertThat(actualValue, is(Sum.TOTAL_AMOUNT));
         };
 
         while (true) {

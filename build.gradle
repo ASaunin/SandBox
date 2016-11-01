@@ -11,6 +11,10 @@ subprojects {
     }
 
     dependencies {
-        testCompile group: 'junit', name: 'junit', version: '4.11'
+        compileOnly 'org.projectlombok:lombok:+'
+
+        testCompile 'junit:junit:+'
+        testCompile 'org.hamcrest:hamcrest-core:+'
+        testCompile 'org.mockito:mockito-core:+'
     }
 }

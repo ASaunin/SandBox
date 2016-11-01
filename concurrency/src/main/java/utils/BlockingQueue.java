@@ -5,8 +5,6 @@ import java.util.Queue;
 
 public class BlockingQueue<T> {
 
-    // TODO: 24.10.2016 Implement BQ with capacity & overflow notifications
-
     private final Queue<T> items = new LinkedList<>();
 
     public void put(T task) {
