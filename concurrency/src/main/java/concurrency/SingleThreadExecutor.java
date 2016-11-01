@@ -19,6 +19,11 @@ public class SingleThreadExecutor {
         new Thread(new Runner()).start();
     }
 
+    public SingleThreadExecutor(Runnable task) {
+        queue.put(task);
+        new Thread(new Runner()).start();
+    }
+
     public void execute(Runnable task) {
         queue.put(task);
     }
