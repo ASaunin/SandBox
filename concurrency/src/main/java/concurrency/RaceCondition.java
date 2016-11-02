@@ -22,6 +22,7 @@ public class RaceCondition {
             count++;
             System.out.println(count);
         }
+
     }
 
     public static void main(String[] args) {

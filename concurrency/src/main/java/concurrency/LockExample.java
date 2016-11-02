@@ -7,6 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class LockExample {
 
     static class Sum {
+
         final static int TOTAL_AMOUNT = 100;
         private static int x = 0;
         private static int y = TOTAL_AMOUNT;
@@ -31,6 +32,7 @@ public class LockExample {
             final int value = ThreadLocalRandom.current().nextInt();
             return change(value);
         }
+
     }
 
 }
