@@ -4,10 +4,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ReentrantLockExample {
+public class LockExample {
 
     static class Sum {
-        final static int TOTAL_AMOUNT = 100;
+        private final static int TOTAL_AMOUNT = 100;
         private static int x = 0;
         private static int y = TOTAL_AMOUNT;
         private static Lock mutex = new ReentrantLock();

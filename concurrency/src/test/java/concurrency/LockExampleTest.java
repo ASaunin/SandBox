@@ -3,11 +3,11 @@ package concurrency;
 import org.junit.Test;
 import utils.ThreadUtils;
 
-import static concurrency.ReentrantLockExample.Sum;
+import static concurrency.LockExample.Sum;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ReentrantLockExampleTest {
+public class LockExampleTest {
 
     @Test
     public void checkThatSumChangeLeavesUnchangedTotalAmount() {
