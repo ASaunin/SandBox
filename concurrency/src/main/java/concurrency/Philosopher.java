@@ -3,6 +3,8 @@ package concurrency;
 import utils.ThreadUtils;
 
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
@@ -82,7 +84,7 @@ public class Philosopher implements Runnable {
     }
 
     public static void main(String[] args) {
-        final SingleThreadExecutor executor = new SingleThreadExecutor();
+        final ExecutorService executorService = Executors.newCachedThreadPool();
         final ReentrantLock[] chopsticks = Stream
                 .generate(ReentrantLock::new)
                 .limit(NUMBER_OF_PHILOSOPHERS)
@@ -92,8 +94,7 @@ public class Philosopher implements Runnable {
                 .mapToObj(i -> new Philosopher(i, chopsticks[i], chopsticks[(i + 1) % NUMBER_OF_PHILOSOPHERS]))
                 .toArray(Philosopher[]::new);
 
-        Arrays.stream(philosophers).forEach(SingleThreadExecutor::new);
-
+        Arrays.stream(philosophers).forEach(executorService::execute);
     }
 
 }

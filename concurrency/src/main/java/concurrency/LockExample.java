@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class LockExample {
 
     static class Sum {
-        private final static int TOTAL_AMOUNT = 100;
+        final static int TOTAL_AMOUNT = 100;
         private static int x = 0;
         private static int y = TOTAL_AMOUNT;
         private static Lock mutex = new ReentrantLock();
