@@ -1,5 +1,7 @@
 package concurrency;
 
+import lombok.AllArgsConstructor;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -8,13 +10,10 @@ import static utils.ThreadUtils.randomSleep;
 
 public class SemaphoreExample {
 
+    @AllArgsConstructor
     static class Skater implements Runnable {
 
         private final Semaphore semaphore;
-
-        public Skater(Semaphore semaphore) {
-            this.semaphore = semaphore;
-        }
 
         @Override
         public void run() {

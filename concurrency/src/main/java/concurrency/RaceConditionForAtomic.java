@@ -22,10 +22,8 @@ public class RaceConditionForAtomic {
     }
 
     public static void main(String[] args) {
-
         new Thread(new Counter()).start();
         new Thread(new Counter()).start();
-
     }
 
 }

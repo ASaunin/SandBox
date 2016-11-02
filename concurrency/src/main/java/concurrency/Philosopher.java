@@ -1,5 +1,6 @@
 package concurrency;
 
+import lombok.AllArgsConstructor;
 import utils.ThreadUtils;
 
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+@AllArgsConstructor
 public class Philosopher implements Runnable {
 
     private static final int NUMBER_OF_PHILOSOPHERS = 5;
@@ -20,13 +22,6 @@ public class Philosopher implements Runnable {
     private int id;
     private ReentrantLock leftChopstick;
     private ReentrantLock rightChopstick;
-
-    public Philosopher(int id, ReentrantLock leftChopstick, ReentrantLock rightChopstick) {
-        this.id = id;
-        this.leftChopstick = leftChopstick;
-        this.rightChopstick = rightChopstick;
-        System.out.printf("Philosopher %d sat at the table\n", id);
-    }
 
     @Override
     public void run() {
@@ -90,8 +85,7 @@ public class Philosopher implements Runnable {
                 .generate(ReentrantLock::new)
                 .limit(NUMBER_OF_PHILOSOPHERS)
                 .toArray(ReentrantLock[]::new);
-        final Philosopher[] philosophers = IntStream
-                .range(0, NUMBER_OF_PHILOSOPHERS)
+        final Philosopher[] philosophers = IntStream.range(0, NUMBER_OF_PHILOSOPHERS)
                 .mapToObj(i -> new Philosopher(i, chopsticks[i], chopsticks[(i + 1) % NUMBER_OF_PHILOSOPHERS]))
                 .toArray(Philosopher[]::new);
 
