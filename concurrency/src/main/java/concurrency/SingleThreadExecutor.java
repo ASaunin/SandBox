@@ -7,12 +7,14 @@ public class SingleThreadExecutor {
     private BlockingQueue<Runnable> queue = new BlockingQueue<>();
 
     private class Runner implements Runnable {
+
         @Override
         public void run() {
             while (true) {
                 queue.take().run();
             }
         }
+
     }
 
     public SingleThreadExecutor() {

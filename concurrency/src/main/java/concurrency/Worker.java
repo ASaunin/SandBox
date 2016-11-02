@@ -8,6 +8,7 @@ public class Worker {
     private final Queue<Runnable> tasks = new LinkedList<>();
 
     private class Runner implements Runnable {
+
         @Override
         public void run() {
             Runnable task;
@@ -25,6 +26,7 @@ public class Worker {
                 task.run();
             }
         }
+
     }
 
     public Worker() {

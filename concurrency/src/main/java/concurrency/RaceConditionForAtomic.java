@@ -18,6 +18,7 @@ public class RaceConditionForAtomic {
                 System.out.println(value); //Out doesn't work properly, cause println is not in critical section
             }
         }
+
     }
 
     public static void main(String[] args) {

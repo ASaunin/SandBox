@@ -50,6 +50,7 @@ public class Philosopher implements Runnable {
         ThreadUtils.randomSleep(MIN_OPERATION_TIMEOUT, MAX_OPERATION_TIMEOUT);
         System.out.printf("Philosopher %d finished eating\n", id);
     }
+
     private void think() {
         System.out.printf("Philosopher %d started thinking\n", id);
         ThreadUtils.randomSleep(MIN_OPERATION_TIMEOUT, MAX_OPERATION_TIMEOUT);
