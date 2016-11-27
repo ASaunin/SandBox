@@ -1,0 +1,3 @@
+dependencies {
+    compileOnly 'org.apache.commons:commons-io:+'
+}
