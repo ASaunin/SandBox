@@ -14,7 +14,7 @@ subprojects {
         compileOnly 'org.projectlombok:lombok:+'
 
         testCompile 'junit:junit:+'
-        testCompile 'org.hamcrest:hamcrest-core:+'
+        testCompile 'org.hamcrest:hamcrest-all:+'
         testCompile 'org.mockito:mockito-core:+'
     }
 }
