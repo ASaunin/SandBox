@@ -9,13 +9,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.WebDriverFactory.BrowserType;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static selenium.WebDriverFactory.BrowserType.CHROME;
 
 public class FindElementsGoogleTest {
+
+    // TODO: 28.11.2016 Implement runner for each browser type
 
     private static final BrowserType type = CHROME;
     private static final String GOOGLE = "google";
@@ -30,6 +33,11 @@ public class FindElementsGoogleTest {
     @Before
     public void initPage() {
         driver.get(GOOGLE_URL);
+        try {
+            Thread.sleep(100);// TODO: 28.11.2016 Create common module core use unchecked ThreadUtils.sleep  
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -69,8 +77,37 @@ public class FindElementsGoogleTest {
     public void findElementByLink() throws Exception {
         final WebElement element = driver.findElement(By.linkText("Почта"));
         final String elementRef = element.getAttribute("href");
-        final String expectedText = "mail.".concat(GOOGLE).concat(".com");
+        final String expectedText = "mail.google.com";
         assertThat(elementRef, containsString(expectedText));
+    }
+
+    @Test
+    public void findElementByPartialLink() throws Exception {
+        final WebElement element = driver.findElement(By.partialLinkText("бизнес"));
+        final String elementRef = element.getAttribute("href");
+        final String expectedText = "www.google.ru/services";
+        assertThat(elementRef, containsString(expectedText));
+    }
+
+    @Test
+    public void findElementByUniqueClassName() throws Exception {
+        final WebElement element = driver.findElement(By.className("sbib_b"));
+        final String elementId = element.getAttribute("id");
+        assertThat(elementId, equalTo("sb_ifc0"));
+    }
+
+    @Test
+    public void findSeveralElementsByClassName() throws Exception {
+        final List<WebElement> elements = driver.findElements(By.className("_Gs"));
+        final WebElement element = driver.findElement(By.linkText("Реклама"));
+        assertThat(elements, hasItem(element));
+    }
+
+    @Test
+    public void findSeveralElementsByTagName() throws Exception {
+        final List<WebElement> elements = driver.findElements(By.tagName("a"));
+        final WebElement element = driver.findElement(By.linkText("Реклама"));
+        assertThat(elements, hasItem(element));
     }
 
     @AfterClass
