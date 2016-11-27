@@ -1,5 +1,6 @@
 rootProject.name = 'SandBox'
 include 'concurrency',
         'refactoring',
+        'testing',
         'sql',
         'xml'
