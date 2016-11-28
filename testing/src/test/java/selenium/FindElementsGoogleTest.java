@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selenium.WebDriverFactory.BrowserType;
+import utils.ThreadUtils;
 
 import java.util.List;
 
@@ -33,11 +34,7 @@ public class FindElementsGoogleTest {
     @Before
     public void initPage() {
         driver.get(GOOGLE_URL);
-        try {
-            Thread.sleep(100);// TODO: 28.11.2016 Create common module core use unchecked ThreadUtils.sleep  
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ThreadUtils.sleep(100);
     }
 
     @Test
@@ -75,7 +72,7 @@ public class FindElementsGoogleTest {
 
     @Test
     public void findElementByLink() throws Exception {
-        final WebElement element = driver.findElement(By.linkText("Почта"));
+        final WebElement element = driver.findElement(By.linkText("\u041f\u043e\u0447\u0442\u0430"));
         final String elementRef = element.getAttribute("href");
         final String expectedText = "mail.google.com";
         assertThat(elementRef, containsString(expectedText));
@@ -83,7 +80,7 @@ public class FindElementsGoogleTest {
 
     @Test
     public void findElementByPartialLink() throws Exception {
-        final WebElement element = driver.findElement(By.partialLinkText("бизнес"));
+        final WebElement element = driver.findElement(By.partialLinkText("\u0431\u0438\u0437\u043d\u0435\u0441"));
         final String elementRef = element.getAttribute("href");
         final String expectedText = "www.google.ru/services";
         assertThat(elementRef, containsString(expectedText));
@@ -99,14 +96,14 @@ public class FindElementsGoogleTest {
     @Test
     public void findSeveralElementsByClassName() throws Exception {
         final List<WebElement> elements = driver.findElements(By.className("_Gs"));
-        final WebElement element = driver.findElement(By.linkText("Реклама"));
+        final WebElement element = driver.findElement(By.linkText("\u0420\u0435\u043a\u043b\u0430\u043c\u0430"));
         assertThat(elements, hasItem(element));
     }
 
     @Test
     public void findSeveralElementsByTagName() throws Exception {
         final List<WebElement> elements = driver.findElements(By.tagName("a"));
-        final WebElement element = driver.findElement(By.linkText("Реклама"));
+        final WebElement element = driver.findElement(By.linkText("\u0420\u0435\u043a\u043b\u0430\u043c\u0430"));
         assertThat(elements, hasItem(element));
     }
 
