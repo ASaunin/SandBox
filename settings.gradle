@@ -1,5 +1,6 @@
 rootProject.name = 'SandBox'
-include 'concurrency',
+include 'common',
+        'concurrency',
         'refactoring',
         'testing',
         'sql',

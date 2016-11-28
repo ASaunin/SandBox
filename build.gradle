@@ -1,8 +1,12 @@
+apply plugin: "idea"
+apply plugin: "eclipse"
+
 subprojects {
     group 'SandBox'
     version '1.0-SNAPSHOT'
 
     apply plugin: 'java'
+    apply plugin: "application"
 
     sourceCompatibility = 1.8
 
@@ -16,5 +20,9 @@ subprojects {
         testCompile 'junit:junit:+'
         testCompile 'org.hamcrest:hamcrest-all:+'
         testCompile 'org.mockito:mockito-core:+'
+    }
+
+    task wrapper(type: Wrapper) {
+        gradleVersion = '3.0'
     }
 }

@@ -18,7 +18,7 @@ public class LockExampleTest {
             assertThat(actualValue, is(Sum.TOTAL_AMOUNT));
         };
 
-        while (true) {
+        for (int i = 0; i < 100 ; i++) {
             ThreadUtils.sleep(10);
             executor1.execute(task);
             executor2.execute(task);
