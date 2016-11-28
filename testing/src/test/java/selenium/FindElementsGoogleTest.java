@@ -17,6 +17,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static selenium.WebDriverFactory.BrowserType.CHROME;
 
+/**
+ * Whatever we use to find an element, id, name, xpath, css it should always be unique.
+ * It should only find one matching node unless we want to capture a list of elements.
+ */
 public class FindElementsGoogleTest {
 
     // TODO: 28.11.2016 Implement runner for each browser type
@@ -56,6 +60,9 @@ public class FindElementsGoogleTest {
         assertThat(elementId, equalTo("lst-ib"));
     }
 
+    /**
+     *@see <a href="http://www.w3schools.com/xml/xpath_syntax.asp">FYI</a>
+     */
     @Test
     public void findElementByXpath() throws Exception {
         final WebElement element = driver.findElement(By.xpath("//*[@id=\"lst-ib\"]"));
@@ -63,6 +70,10 @@ public class FindElementsGoogleTest {
         assertThat(elementId, equalTo("lst-ib"));
     }
 
+
+    /**
+     *@see <a href="http://www.w3schools.com/cssref/css_selectors.asp">FYI</a>
+     */
     @Test
     public void findElementByCssSelector() throws Exception {
         final WebElement element = driver.findElement(By.cssSelector("#lst-ib"));
