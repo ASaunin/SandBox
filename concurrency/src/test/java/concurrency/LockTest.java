@@ -7,7 +7,7 @@ import static concurrency.LockExample.Sum;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class LockExampleTest {
+public class LockTest {
 
     @Test
     public void checkThatSumChangeLeavesUnchangedTotalAmount() {

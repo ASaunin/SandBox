@@ -1,4 +1,4 @@
-package concurrency;
+package model;
 
 import lombok.AllArgsConstructor;
 import utils.ThreadUtils;
@@ -80,7 +80,7 @@ public class Philosopher implements Runnable {
     }
 
     public static void main(String[] args) {
-        final ExecutorService executorService = Executors.newCachedThreadPool();
+        final ExecutorService executor = Executors.newCachedThreadPool();
         final ReentrantLock[] chopsticks = Stream
                 .generate(ReentrantLock::new)
                 .limit(NUMBER_OF_PHILOSOPHERS)
@@ -89,7 +89,7 @@ public class Philosopher implements Runnable {
                 .mapToObj(i -> new Philosopher(i, chopsticks[i], chopsticks[(i + 1) % NUMBER_OF_PHILOSOPHERS]))
                 .toArray(Philosopher[]::new);
 
-        Arrays.stream(philosophers).forEach(executorService::execute);
+        Arrays.stream(philosophers).forEach(executor::execute);
     }
 
 }

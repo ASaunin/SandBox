@@ -1,7 +1,5 @@
 package concurrency;
 
-import utils.BlockingQueue;
-
 public class SingleThreadExecutor {
 
     private BlockingQueue<Runnable> queue = new BlockingQueue<>();

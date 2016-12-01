@@ -32,12 +32,12 @@ public class LatchExample {
     }
 
     public static void main(String[] args) {
-        final int NUMBER_OF_RUNNERS = 5;
-        final ExecutorService executorService = Executors.newCachedThreadPool();
+        final int NUMBER_OF_SPRINTERS = 5;
+        final ExecutorService executor = Executors.newCachedThreadPool();
 
-        IntStream.range(0, NUMBER_OF_RUNNERS)
+        IntStream.range(0, NUMBER_OF_SPRINTERS)
                 .mapToObj(Runner::new)
-                .forEach(executorService::execute);
+                .forEach(executor::execute);
 
         sleep(1000);
         System.out.println("Ready...");

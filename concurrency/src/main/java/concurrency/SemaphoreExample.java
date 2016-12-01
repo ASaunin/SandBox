@@ -26,13 +26,13 @@ public class SemaphoreExample {
     }
 
     public static void main(String[] args) {
-        final ExecutorService executorService = Executors.newCachedThreadPool();
+        final ExecutorService executor = Executors.newCachedThreadPool();
         final Semaphore semaphore = new Semaphore(10);
 
         while (true) {
             randomSleep(500, 1000);
             semaphore.acquireUninterruptibly();
-            executorService.execute(new Skater(semaphore));
+            executor.execute(new Skater(semaphore));
         }
     }
 
