@@ -48,6 +48,7 @@ public class LatchExample {
         sleep(1000);
         System.out.println("Go!!!");
         latch.countDown();
+        executor.shutdown();
     }
 
 }
