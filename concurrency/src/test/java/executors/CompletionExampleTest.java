@@ -46,7 +46,7 @@ public class CompletionExampleTest {
         for (int expected = 0; expected < N_TASKS; expected++) {
             final Future<Integer> future = executorCompletionService.take();
             final int actual = future.get();
-            System.out.printf("Udrdered: %d\n", actual);
+            System.out.printf("Unordered: %d\n", actual);
             assertThat(results, hasItem(future));
         }
     }
