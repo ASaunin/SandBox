@@ -1,10 +1,9 @@
-package executors;
+package executors.poolmanager;
 
 import utils.ThreadUtils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 public class ThreadPoolManagerApp {
@@ -20,10 +19,9 @@ public class ThreadPoolManagerApp {
                 .mapToObj((i) ->
                         (Runnable) () -> {
                             ThreadUtils.randomSleep(MIN_TIMEOUT, MAX_TIMEOUT);
-                            if (ThreadLocalRandom.current().nextInt(5) > 1)
-                                manager.submit(new ReaderTask(MIN_TIMEOUT, MAX_TIMEOUT));
-                            else
-                                manager.submit(new WriterTask(MIN_TIMEOUT, MAX_TIMEOUT));
+                            final Subscriber subscriber = Subscriber.getRandomSubscriber(0.75);
+                            final Runnable task = subscriber.createTask(MIN_TIMEOUT, MAX_TIMEOUT);
+                            subscriber.execute(manager, task);
                         }
                 )
                 .limit(N_TASKS)

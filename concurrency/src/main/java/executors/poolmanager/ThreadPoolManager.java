@@ -1,10 +1,13 @@
-package executors;
+package executors.poolmanager;
+
+import utils.Ansi;
 
 import java.util.concurrent.*;
 
 /**
  * Custom tread pool manager provides concurrent single thread priority writing and multithreaded reading
  */
+// TODO: 10.12.2016 Rewrite code using one input queue for both task types
 public class ThreadPoolManager {
 
     private static final ThreadPoolManager INSTANCE = new ThreadPoolManager();
@@ -17,15 +20,11 @@ public class ThreadPoolManager {
     }
 
     public void submit(WriterTask task) {
-        System.out.printf("%s requests to write\n", task);
+        System.out.printf("%s requested an access\n", task);
         if (readerQueue.activeIsEmpty() && writerQueue.activeIsEmpty()) {
             writerQueue.putActive(task);
         } else {
-            writerQueue.putBuffer(task);
-            System.out.printf("%s locked\n", task);
-            writerQueue.acquire();
-            writerQueue.putActiveFromBuffer();
-            System.out.printf("%s unlocked\n", task);
+            writerQueue.waitUntilSubmit(task);
         }
         CompletableFuture.runAsync(task, executor)
                 .thenAccept((value) -> {
@@ -35,15 +34,11 @@ public class ThreadPoolManager {
     }
 
     public void submit(ReaderTask task) {
-        System.out.printf("%s requests to read\n", task);
+        System.out.printf("%s requested an access\n", task);
         if (writerQueue.IsEmpty()) {
             readerQueue.putActive(task);
         } else {
-            readerQueue.putBuffer(task);
-            System.out.printf("%s locked\n", task);
-            readerQueue.acquire();
-            readerQueue.putActiveFromBuffer();
-            System.out.printf("%s unlocked\n", task);
+            readerQueue.waitUntilSubmit(task);
         }
         CompletableFuture.runAsync(task, executor)
                 .thenAccept((value) -> {
@@ -110,6 +105,14 @@ public class ThreadPoolManager {
 
         public synchronized void putActiveFromBuffer() {
             active.offer(pollBuffer());
+        }
+
+        public void waitUntilSubmit(Runnable task) {
+            putBuffer(task);
+            System.out.println(Ansi.Red.format("%s locked", task));
+            acquire();
+            putActiveFromBuffer();
+            System.out.printf("%s unlocked\n", task);
         }
 
         public void putBuffer(Runnable task) {

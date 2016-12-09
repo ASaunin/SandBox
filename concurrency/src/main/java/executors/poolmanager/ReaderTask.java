@@ -1,5 +1,6 @@
-package executors;
+package executors.poolmanager;
 
+import utils.Ansi;
 import utils.ThreadUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,9 +22,9 @@ class ReaderTask implements Runnable {
     public void run() {
         final Thread currentThread = Thread.currentThread();
         currentThread.setName("Reader" + count);
-        System.out.printf("%s started work\n", currentThread.getName());
+        System.out.println(Ansi.Yellow.format("%s started work", currentThread.getName()));
         ThreadUtils.randomSleep(minMillis, maxMillis);
-        System.out.printf("%s finished work\n", currentThread.getName());
+        System.out.printf(Ansi.Green.format("%s finished work\n", currentThread.getName()));
     }
 
     @Override
