@@ -1,3 +1,5 @@
+package xml;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +21,9 @@ public class XmlTransformerTest {
     @Test
     public void checkTransformationIsCorrect() throws Exception {
         final ClassLoader classLoader = XmlTransformerTest.class.getClassLoader();
-        final File inputFile = new File(classLoader.getResource("catalog.xml").toURI());
-        final File xsltFile = new File(classLoader.getResource("transform.xsl").toURI());
-        final File expectedFile = new File(classLoader.getResource("catalog.html").toURI());
+        final File inputFile = new File(classLoader.getResource("xml/catalog.xml").toURI());
+        final File xsltFile = new File(classLoader.getResource("xml/transform.xsl").toURI());
+        final File expectedFile = new File(classLoader.getResource("xml/catalog.html").toURI());
 
         XMLTransformer.convert(inputFile, outputFile, xsltFile);
 
