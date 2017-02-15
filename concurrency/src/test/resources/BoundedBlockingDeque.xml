@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="bounded-blocking-deque">
+
+    <test name="take-first">
+        <classes>
+            <class name="concurrency.BoundedBlockingDequeConcurrentTest">
+                <methods><include name="takeFirstShouldReturnAscendingOrder"/></methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="take-last">
+        <classes>
+            <class name="concurrency.BoundedBlockingDequeConcurrentTest">
+                <methods><include name="takeFirstShouldReturnDescendingOrder"/></methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

@@ -13,9 +13,7 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 import static model.Sprinter.State.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.isOneOf;
+import static org.assertj.core.api.Assertions.assertThat;
 import static utils.ThreadUtils.sleep;
 
 public class BarrierTest {
@@ -38,13 +36,13 @@ public class BarrierTest {
 
         sprinters.forEach(EXECUTOR::execute);
         sleep(10);
-        sprinters.forEach(s -> assertThat(s.getState(), is(STARTED)));
+        sprinters.forEach(s -> assertThat(s.getState()).isEqualTo(STARTED));
 
         sleep(250);
-        sprinters.forEach(s -> assertThat(s.getState(), isOneOf(STARTED, FINISHED)));
+        sprinters.forEach(s -> assertThat(s.getState()).isIn(STARTED, FINISHED));
 
         sleep(250);
-        sprinters.forEach(s -> assertThat(s.getState(), is(PASSED)));
+        sprinters.forEach(s -> assertThat(s.getState()).isEqualTo(PASSED));
     }
 
     @AfterClass

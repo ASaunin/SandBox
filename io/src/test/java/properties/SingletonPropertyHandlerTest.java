@@ -2,8 +2,7 @@ package properties;
 
 import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SingletonPropertyHandlerTest {
 
@@ -11,12 +10,12 @@ public class SingletonPropertyHandlerTest {
 
     @Test
     public void wrongKeyReturnsDefaultValue() throws Exception {
-        assertThat(props.getValue("wrong.key"), is("Here should be a description soon"));
+        assertThat(props.getValue("wrong.key")).isEqualTo("Here should be a description soon");
     }
 
     @Test
     public void existingKeyReturnsRightValue() throws Exception {
-        assertThat(props.getValue("right.key"), is("Lorem ipsum"));
+        assertThat(props.getValue("right.key")).isEqualTo("Lorem ipsum");
     }
 
 }

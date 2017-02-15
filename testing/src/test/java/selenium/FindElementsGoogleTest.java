@@ -12,9 +12,7 @@ import utils.ThreadUtils;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.assertj.core.api.Assertions.assertThat;
 import static selenium.WebDriverFactory.BrowserType.CHROME;
 
 /**
@@ -43,21 +41,21 @@ public class FindElementsGoogleTest {
 
     @Test
     public void checkPageTitle() throws Exception {
-        assertThat(driver.getTitle(), equalToIgnoringCase(GOOGLE));
+        assertThat(driver.getTitle()).isEqualToIgnoringCase(GOOGLE);
     }
 
     @Test
     public void findElementById() throws Exception {
         final WebElement element = driver.findElement(By.id("lst-ib"));
         final String elementName = element.getAttribute("name");
-        assertThat(elementName, equalTo("q"));
+        assertThat(elementName).isEqualTo("q");
     }
 
     @Test
     public void findElementByName() throws Exception {
         final WebElement element = driver.findElement(By.name("q"));
         final String elementId = element.getAttribute("id");
-        assertThat(elementId, equalTo("lst-ib"));
+        assertThat(elementId).isEqualTo("lst-ib");
     }
 
     /**
@@ -67,7 +65,7 @@ public class FindElementsGoogleTest {
     public void findElementByXpath() throws Exception {
         final WebElement element = driver.findElement(By.xpath("//*[@id=\"lst-ib\"]"));
         final String elementId = element.getAttribute("id");
-        assertThat(elementId, equalTo("lst-ib"));
+        assertThat(elementId).isEqualTo("lst-ib");
     }
 
 
@@ -78,7 +76,7 @@ public class FindElementsGoogleTest {
     public void findElementByCssSelector() throws Exception {
         final WebElement element = driver.findElement(By.cssSelector("#lst-ib"));
         final String elementId = element.getAttribute("id");
-        assertThat(elementId, equalTo("lst-ib"));
+        assertThat(elementId).isEqualTo("lst-ib");
     }
 
     @Test
@@ -86,7 +84,7 @@ public class FindElementsGoogleTest {
         final WebElement element = driver.findElement(By.linkText("\u041f\u043e\u0447\u0442\u0430"));
         final String elementRef = element.getAttribute("href");
         final String expectedText = "mail.google.com";
-        assertThat(elementRef, containsString(expectedText));
+        assertThat(elementRef).contains(expectedText);
     }
 
     @Test
@@ -94,28 +92,28 @@ public class FindElementsGoogleTest {
         final WebElement element = driver.findElement(By.partialLinkText("\u0431\u0438\u0437\u043d\u0435\u0441"));
         final String elementRef = element.getAttribute("href");
         final String expectedText = "www.google.ru/services";
-        assertThat(elementRef, containsString(expectedText));
+        assertThat(elementRef).contains(expectedText);
     }
 
     @Test
     public void findElementByUniqueClassName() throws Exception {
         final WebElement element = driver.findElement(By.className("sbib_b"));
         final String elementId = element.getAttribute("id");
-        assertThat(elementId, equalTo("sb_ifc0"));
+        assertThat(elementId).isEqualTo("sb_ifc0");
     }
 
     @Test
     public void findSeveralElementsByClassName() throws Exception {
         final List<WebElement> elements = driver.findElements(By.className("_Gs"));
         final WebElement element = driver.findElement(By.linkText("\u0420\u0435\u043a\u043b\u0430\u043c\u0430"));
-        assertThat(elements, hasItem(element));
+        assertThat(elements).contains(element);
     }
 
     @Test
     public void findSeveralElementsByTagName() throws Exception {
         final List<WebElement> elements = driver.findElements(By.tagName("a"));
         final WebElement element = driver.findElement(By.linkText("\u0420\u0435\u043a\u043b\u0430\u043c\u0430"));
-        assertThat(elements, hasItem(element));
+        assertThat(elements).contains(element);
     }
 
     @AfterClass

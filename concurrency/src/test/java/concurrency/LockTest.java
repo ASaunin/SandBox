@@ -4,8 +4,7 @@ import org.junit.Test;
 import utils.ThreadUtils;
 
 import static concurrency.LockExample.Sum;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LockTest {
 
@@ -15,7 +14,7 @@ public class LockTest {
         final SingleThreadExecutor executor2 = new SingleThreadExecutor();
         final Runnable task = () -> {
             final int actualValue = Sum.change();
-            assertThat(actualValue, is(Sum.TOTAL_AMOUNT));
+            assertThat(actualValue).isEqualTo(Sum.TOTAL_AMOUNT);
         };
 
         for (int i = 0; i < 100 ; i++) {

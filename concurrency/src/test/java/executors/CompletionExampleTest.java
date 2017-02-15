@@ -10,10 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CompletionExampleTest {
 
@@ -34,7 +31,7 @@ public class CompletionExampleTest {
             final Future<Integer> future = results.get(expected);
             final int actual = future.get();
             System.out.printf("Ordered: %d\n", actual);
-            assertThat(actual, is(expected));
+            assertThat(actual).isEqualTo(expected);
         }
     }
 
@@ -47,7 +44,7 @@ public class CompletionExampleTest {
             final Future<Integer> future = executorCompletionService.take();
             final int actual = future.get();
             System.out.printf("Unordered: %d\n", actual);
-            assertThat(results, hasItem(future));
+            assertThat(results).contains(future);
         }
     }
 

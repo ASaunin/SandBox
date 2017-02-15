@@ -2,14 +2,14 @@ package concurrency;
 
 public class SingleThreadExecutor {
 
-    private BlockingQueue<Runnable> queue = new BlockingQueue<>();
+    private SimpleBlockingDeque<Runnable> queue = new SimpleBlockingDeque<>();
 
     private class Runner implements Runnable {
 
         @Override
         public void run() {
             while (true) {
-                queue.take().run();
+                queue.takeLast().run();
             }
         }
 

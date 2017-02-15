@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.util.stream.IntStream;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SingletonTest {
 
@@ -15,7 +14,7 @@ public class SingletonTest {
         System.out.println("Start");
         IntStream.range(0, 10)
                 .mapToObj(i -> new Pair<>(Singleton.getInstance(), Singleton.getInstance()))
-                .forEach(p -> assertThat(p.getKey(), is(p.getValue())));
+                .forEach(p -> assertThat(p.getKey()).isEqualTo(p.getValue()));
         System.out.println("Finish");
     }
 
