@@ -19,11 +19,11 @@ import static utils.ThreadUtils.sleep;
 public class BarrierTest {
 
     private static final int NUMBER_OF_SPRINTERS = 5;
-    private static ExecutorService EXECUTOR;
+    private static ExecutorService executor;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        EXECUTOR = Executors.newFixedThreadPool(NUMBER_OF_SPRINTERS);
+        executor = Executors.newFixedThreadPool(NUMBER_OF_SPRINTERS);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class BarrierTest {
                 .mapToObj((i) -> new Sprinter<State>(barrier))
                 .collect(toList());
 
-        sprinters.forEach(EXECUTOR::execute);
+        sprinters.forEach(executor::execute);
         sleep(10);
         sprinters.forEach(s -> assertThat(s.getState()).isEqualTo(STARTED));
 
@@ -47,7 +47,7 @@ public class BarrierTest {
 
     @AfterClass
     public static void tearDown() throws Exception {
-        EXECUTOR.shutdown();
+        executor.shutdown();
     }
 
 }
